@@ -5,40 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPPORTUNITÉ plus</title>
     <style>
-        body { font-family: sans-serif; margin: 0; background-color: #f4f4f4; }
-        /* Header style Paryaj */
-        .header { background: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; }
-        .logo { font-weight: bold; font-size: 1.2rem; color: #0a3663; }
-        .solde-badge { background: #eee; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
-        /* Carousel */
-        .carousel { width: 100%; height: 180px; overflow: hidden; background: #ddd; position: relative; }
-        .carousel img { width: 100%; height: 100%; object-fit: cover; }
-        /* Section Solde */
-        .solde-container { background: #fff; margin: 20px; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .btn-container { display: flex; gap: 10px; padding: 0 20px 20px 20px; }
-        .btn { flex: 1; padding: 15px; border: none; color: white; font-weight: bold; text-align: center; border-radius: 5px; text-decoration: none; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { margin: 0; background-color: #f4f6f7; display: flex; flex-direction: column; min-height: 100vh; }
+        /* Header */
+        header { background: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #0a3663; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo { font-weight: 800; color: #0a3663; font-size: 1.2rem; }
+        .solde-box { background: #0a3663; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+        /* Slider */
+        .slider { width: 100%; height: 200px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #555; overflow: hidden; position: relative; }
+        /* Dashboard */
+        .dashboard { padding: 20px; text-align: center; }
+        .solde-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .solde-val { font-size: 2.5rem; font-weight: 800; color: #0a3663; margin: 10px 0; }
+        /* Buttons */
+        .actions { display: flex; gap: 10px; }
+        .btn { flex: 1; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; text-decoration: none; transition: 0.3s; }
         .depot { background: #00a651; }
         .retrait { background: #0a3663; }
-        /* Animation fluide */
-        .fade-in { animation: fadeIn 1s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .btn:active { transform: scale(0.95); }
     </style>
 </head>
-<body class="fade-in">
-    <div class="header">
-        <div class="logo">OPPORTUNITÉ plus</div>
-        <div class="solde-badge">0 HTG</div>
+<body>
+    <header>
+        <div class="logo">OPPORTUNITÉ+</div>
+        <div class="solde-box">0 HTG</div>
+    </header>
+    <div class="slider" id="slider">Carrousel en attente d'images</div>
+    <div class="dashboard">
+        <div class="solde-card">
+            <div>Solde Disponible</div>
+            <div class="solde-val">0 HTG</div>
+        </div>
+        <div class="actions">
+            <a href="https://wa.me/50947011507?text=Dépôt" class="btn depot">Déposer</a>
+            <a href="https://wa.me/50947011507?text=Retrait" class="btn retrait">Retirer</a>
+        </div>
     </div>
-    <div class="carousel" id="carousel">
-        <p style="text-align:center; padding-top:70px; color:#666;">Espace Publicitaire</p>
-    </div>
-    <div class="solde-container">
-        <div style="color:#777;">Solde Actuel</div>
-        <h1 style="margin: 10px 0;">0 HTG</h1>
-    </div>
-    <div class="btn-container">
-        <a href="https://wa.me/50947011507?text=Je+veux+deposer" class="btn depot">Déposer</a>
-        <a href="https://wa.me/50947011507?text=Je+veux+retirer" class="btn retrait">Retirer</a>
-    </div>
+    <script>
+        console.log("Système OPPORTUNITÉ+ prêt");
+        // Animation simple d'entrée
+        document.body.style.opacity = "0";
+        window.onload = () => { document.body.style.transition = "1s"; document.body.style.opacity = "1"; }
+    </script>
 </body>
 </html>
