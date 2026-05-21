@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPPORTUNITÉ plus - Plateforme Officielle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a3663;
+            --accent: #f39c12;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --success: #27ae60;
+            --danger: #e74c3c;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        
+        /* Header & Navbar */
+        header { background: var(--primary); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-area img { height: 45px; width: 45px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; }
+        .logo-title { font-weight: 700; font-size: 1.4rem; letter-spacing: 1px; }
+        .logo-title span { color: var(--accent); }
+        
+        /* Language Selector */
+        .lang-selector { background: rgba(255,255,255,0.1); border: 1px solid var(--accent); color: white; padding: 5px 10px; border-radius: 20px; cursor: pointer; outline: none; font-size: 0.9rem; font-weight: 600; }
+        .lang-selector option { background: var(--primary); color: white; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #0a3663 0%, #1a5276 100%); color: white; padding: 80px 5% 60px; text-align: center; border-bottom: 5px solid var(--accent); }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 700; }
+        .hero p { font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; opacity: 0.9; }
+        .cta-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .btn { padding: 12px 25px; border-radius: 25px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; font-size: 0.95rem; }
+        .btn-primary { background: var(--accent); color: var(--primary); }
+        .btn-primary:hover { background: #e67e22; transform: translateY(-2px); }
+        .btn-outline { background: transparent; color: white; border: 2px solid white; }
+        .btn-outline:hover { background: white; color: var(--primary); transform: translateY(-2px); }
+
+        /* Sections General */
+        section { padding: 60px 5%; }
+        .section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; color: var(--primary); position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent); margin: 10px auto 0; }
+        
+        /* Grid Formations */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; border-top: 4px solid var(--primary); }
+        .card:hover { transform: translateY(-5px); }
+        .card-body { padding: 25px; }
+        .card-tag { background: #ebf5fb; color: var(--primary); padding: 4px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 10px; }
+        .card-title { font-size: 1.3rem; margin-bottom: 10px; color: var(--dark); }
+        .card-text { font-size: 0.95rem; color: #566573; margin-bottom: 20px; text-align: justify; }
+        .card-price { font-size: 1.2rem; font-weight: 700; color: var(--success); margin-bottom: 15px; }
+        
+        /* Economy Lakay Styles */
+        .card-economy { border-top: 4px solid var(--accent); }
+        .badge-flex { display: inline-block; background: #fef9e7; color: #b7950b; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; }
+
+        /* Footer & Copyright */
+        footer { background: #1a252f; color: white; text-align: center; padding: 30px 5%; font-size: 0.9rem; border-top: 3px solid var(--accent); }
+        
+        /* Modals / Formulaires */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(4px); }
+        .modal-content { background: white; padding: 30px; border-radius: 16px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; border-top: 6px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #95a5a6; transition: color 0.3s; }
+        .close-btn:hover { color: var(--danger); }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 10px 15px; border: 1px solid #d5dbdb; border-radius: 8px; font-size: 0.95rem; outline: none; }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 5px rgba(10,54,99,0.2); }
+        .checkbox-group { display: flex; gap: 10px; align-items: flex-start; background: #f4f6f7; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 0.85rem; }
+        .checkbox-group input { margin-top: 3px; }
+        
+        .info-legal { font-size: 0.8rem; color: #7f8c8d; text-align: center; margin-top: 15px; border-top: 1px solid #eaeded; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <img src="images/logo.jpg" onerror="this.src='https://via.placeholder.com/150'" alt="OPPORTUNITÉ plus">
+            <div class="logo-title" id="nav-title">OPPORTUNITÉ <span>plus</span></div>
+        </div>
+        <select class="lang-selector" id="langSelect" onchange="changeLanguage()">
+            <option value="fr">Français</option>
+            <option value="kr">Kreyòl</option>
+            <option value="en">English</option>
+        </select>
+    </header>
+
+    <section class="hero">
+        <h1 id="hero-title">Technologie Moderne & Solidarité</h1>
+        <p id="hero-desc">Propulsé par Paul Elie Vlaminck en collaboration avec l'administration du CFTM. Découvrez nos formations de pointe et notre réseau d'épargne révolutionnaire Économie Lakay.</p>
+        <div class="cta-buttons">
+            <button class="btn btn-primary" onclick="openModal('modalPartner')" id="btn-cta-partner">Devenir Partenaire</button>
+            <button class="btn btn-outline" onclick="openModal('modalAgent')" id="btn-cta-agent">Rejoindre comme Agent</button>
+            <button class="btn btn-outline" onclick="openModal('modalDon')" id="btn-cta-don" style="background: rgba(255,255,255,0.1);">Faire un Don</button>
+        </div>
+    </section>
+
+    <section id="formations">
+        <h2 class="section-title" id="title-formations">Nos Formations Certifiantes</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-body">
+                    <span class="card-tag">CFTM Tech</span>
+                    <h3 class="card-title" id="f1-title">Cybersécurité Avancée</h3>
+                    <p class="card-text" id="f1-desc">Maîtrisez les techniques de test d'intrusion, la sécurisation des infrastructures mobiles/réseaux et l'administration sécurisée des systèmes Unix/Termux.</p>
+                    <div class="card-price" id="f1-price">Sur Demande</div>
+                    <a href="https://wa.me/50931589133?text=Bonjour%20OPPORTUNIT%C3%89%20plus,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formation%20en%20Cybers%C3%A9curit%C3%A9." class="btn btn-primary style-btn-wa" style="width:100%; text-align:center;" id="f1-btn">S'inscrire via WhatsApp</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <span class="card-tag">CFTM Business</span>
+                    <h3 class="card-title" id="f2-title">Market Management</h3>
+                    <p class="card-text" id="f2-desc">Développez des compétences solides en stratégies de vente de services en ligne, gestion de portefeuilles clients et automatisation commerciale.</p>
+                    <div class="card-price" id="f2-price">Sur Demande</div>
+                    <a href="https://wa.me/50931589133?text=Bonjour%20OPPORTUNIT%C3%89%20plus,%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formation%20en%20Market%20Management." class="btn btn-primary style-btn-wa" style="width:100%; text-align:center;" id="f2-btn">S'inscrire via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="economie-lakay" style="background:#f4f6f7;">
+        <h2 class="section-title" id="title-lakay">Économie Lakay (Épargne Solidaire)</h2>
+        <div class="grid">
+            <div class="card card-economy">
+                <div class="card-body">
+                    <span class="badge-flex" id="e1-tag">Épargne Personnelle</span>
+                    <h3 class="card-title" id="e1-title">Épargne d'Objectif</h3>
+                    <p class="card-text" id="e1-desc">Épargnez de manière autonome et sécurisée à votre rythme pour concrétiser vos projets individuels d'études, d'achat de matériel informatique ou professionnel.</p>
+                    <button class="btn btn-primary" style="width:100%;" onclick="openModal('modalObjectif')" id="e1-btn">Créer mon Objectif</button>
+                </div>
+            </div>
+            <div class="card card-economy">
+                <div class="card-body">
+                    <span class="badge-flex" id="e2-tag">Mutuelle Collective</span>
+                    <h3 class="card-title">Ekonomi Pam</h3>
+                    <p class="card-text" id="e2-desc1">Groupe de cotisation solidaire dynamique. Épargne collective planifiée par roulement régulier pour propulser vos capitaux en toute confiance.</p>
+                    <div class="card-price">50 HTG - 500 HTG</div>
+                    <button class="btn btn-primary" style="width:100%;" onclick="openModal('modalGroupe')" id="e2-btn1">Rejoindre Ekonomi Pam</button>
+                </div>
+            </div>
+            <div class="card card-economy">
+                <div class="card-body">
+                    <span class="badge-flex" id="e3-tag">Mutuelle Collective</span>
+                    <h3 class="card-title">Tipa Tipa Lakay</h3>
+                    <p class="card-text" id="e3-desc2">Épargne collaborative structurée pas à pas. Idéal pour bâtir une sécurité financière solide et progressive au sein d'une communauté vérifiée.</p>
+                    <div class="card-price">50 HTG - 500 HTG</div>
+                    <button class="btn btn-primary" style="width:100%;" onclick="openModal('modalGroupe')" id="e3-btn2">Rejoindre Tipa Tipa Lakay</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="modalPartner">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modalPartner')">&times;</span>
+            <h3 style="margin-bottom:20px; color:var(--primary);" id="m1-title">Formulaire Partenaire Commercial</h3>
+            <form action="https://formspree.io/f/xoqgpeae" method="POST">
+                <div class="form-group">
+                    <label id="lbl-p1">Adresse Email (Gmail)</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-p2">Numéro WhatsApp / Contact</label>
+                    <input type="tel" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-p3">Ville et Zones de livraison</label>
+                    <input type="text" name="zone_livraison" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-p4">Public Cible & Description Produits</label>
+                    <textarea name="description_produits" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" required>
+                    <label id="chk-p1">J'accepte les frais d'inscription obligatoires de 250 HTG par mois pour maintenir mes fiches actives.</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" required>
+                    <label id="chk-p2">Je valide la répartition contractuelle des ventes : 25% de commission pour l'agent marketing et 5% pour OPPORTUNITÉ plus.</label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;" id="btn-submit-p">Soumettre la Demande</button>
+            </form>
+            <div class="info-legal" id="leg-p">Propriété exclusive de Paul Elie Vlaminck & Administration CFTM. Clause de non-divulgation active.</div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalDon">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modalDon')">&times;</span>
+            <h3 style="margin-bottom:15px; color:var(--primary);" id="m2-title">Soutenir Nos Actions Sociales</h3>
+            <p style="font-size:0.85rem; margin-bottom:15px; color:#566573;" id="m2-desc">Vos contributions financières ou matérielles servent directement à financer l'écolage et les fournitures des enfants des rues, ainsi qu'à nourrir et loger les vieillards vulnérables à Gros-Morne.</p>
+            <form action="https://formspree.io/f/xoqgpeae" method="POST">
+                <div class="form-group">
+                    <label id="lbl-d1">Nom Complet / Organisation</label>
+                    <input type="text" name="nom" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-d2">Adresse Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-d3">Type de Soutien / Message</label>
+                    <textarea name="message_don" class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;" id="btn-submit-d">Confirmer mon Engagement</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalAgent">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modalAgent')">&times;</span>
+            <h3 style="margin-bottom:20px; color:var(--primary);" id="m3-title">Recrutement d'Agents Numériques</h3>
+            <form action="https://formspree.io/f/xoqgpeae" method="POST">
+                <div class="form-group">
+                    <label id="lbl-a1">Nom Complet</label>
+                    <input type="text" name="nom_agent" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-a2">Numéro WhatsApp</label>
+                    <input type="tel" name="phone_agent" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-a3">Niveau d'études / Compétences</label>
+                    <input type="text" name="competences" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;" id="btn-submit-a">Postuler au Réseau</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalObjectif">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modalObjectif')">&times;</span>
+            <h3 style="margin-bottom:20px; color:var(--primary);" id="m4-title">Lancer une Épargne d'Objectif</h3>
+            <form action="https://formspree.io/f/xoqgpeae" method="POST">
+                <div class="form-group">
+                    <label id="lbl-o1">Nom de l'Objectif (ex: PC, Études)</label>
+                    <input type="text" name="nom_objectif" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-o2">Montant Cible à Atteindre (HTG)</label>
+                    <input type="number" name="montant_cible" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-o3">Date Limite Souhaitée</label>
+                    <input type="date" name="date_limite" class="form-control" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" required>
+                    <label id="chk-o1">Je comprends que 3% de frais réglementaires (3 HTG par tranche de 100 HTG) seront retenus uniquement lors du retrait final.</label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;" id="btn-submit-o">Ouvrir mon Compte d'Épargne</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalGroupe">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modalGroupe')">&times;</span>
+            <h3 style="margin-bottom:20px; color:var(--primary);" id="m5-title">Inscription Épargne Collective</h3>
+            <form action="https://formspree.io/f/xoqgpeae" method="POST">
+                <div class="form-group">
+                    <label id="lbl-g1">Sélectionnez votre type de Groupe</label>
+                    <select name="type_groupe" class="form-control">
+                        <option value="ekonomi_pam">Ekonomi Pam (Montants Variables)</option>
+                        <option value="tipa_lakay">Tipa Tipa Lakay (Progressif)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-g2">Votre Engagement de Cotisation (par Cycle)</label>
+                    <select name="montant_cotisation" class="form-control">
+                        <option value="50">50 HTG</option>
+                        <option value="100">100 HTG</option>
+                        <option value="250">250 HTG</option>
+                        <option value="500">500 HTG</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="lbl-g3">Jour fixe de versement</label>
+                    <select name="jour_versement" class="form-control">
+                        <option value="lundi">Chaque Lundi</option>
+                        <option value="mardi">Chaque Mardi</option>
+                        <option value="vendredi">Chaque Vendredi</option>
+                    </select>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" required>
+                    <label id="chk-g1">En cas d'arrêt ou abandon de cotisation, je conserve le droit absolu de récupérer l'intégralité de mes fonds accumulés sans aucune pénalité.</label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;" id="btn-submit-g">Valider mon Adhésion</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 OPPORTUNITÉ plus | CFTM Administration. <span id="foot-rights">Tous droits de propriété intellectuelle strictement réservés. Paul Elie Vlaminck.</span></p>
+    </footer>
+
+    <script>
+        const dict = {
+            fr: {
+                navTitle: "OPPORTUNITÉ plus", heroTitle: "Technologie Moderne & Solidarité",
+                heroDesc: "Propulsé par Paul Elie Vlaminck en collaboration avec l'administration du CFTM. Découvrez nos formations de pointe et notre réseau d'épargne révolutionnaire Économie Lakay.",
+                btnPartner: "Devenir Partenaire", btnAgent: "Rejoindre comme Agent", btnDon: "Faire un Don",
+                tForm: "Nos Formations Certifiantes", f1T: "Cybersécurité Avancée",
+                f1D: "Maîtrisez les techniques de test d'intrusion, la sécurisation des infrastructures mobiles/réseaux et l'administration sécurisée des systèmes Unix/Termux.",
+                f2T: "Market Management", f2D: "Développez des compétences solides en stratégies de vente de services en ligne, gestion de portefeuilles clients et automatisation commerciale.",
+                tLakay: "Économie Lakay (Épargne Solidaire)", e1Tag: "Épargne Personnelle", e1T: "Épargne d'Objectif",
+                e1D: "Épargnez de manière autonome et sécurisée à votre rythme pour concrétiser vos projets individuels d'études, d'achat de matériel informatique ou professionnel.",
+                e1B: "Créer mon Objectif", e2Tag: "Mutuelle Collective", e2D1: "Groupe de cotisation solidaire dynamique. Épargne collective planifiée par roulement régulier pour propulser vos capitaux en toute confiance.",
+                e2B1: "Rejoindre Ekonomi Pam", e3D2: "Épargne collaborative structurée pas à pas. Idéal pour bâtir une sécurité financière solide et progressive au sein d'une communauté vérifiée.",
+                e3B2: "Rejoindre Tipa Tipa Lakay"
+            },
+            kr: {
+                navTitle: "OPPÒTINITE plus", heroTitle: "Teknoloji Modèn & Solidarite",
+                heroDesc: "Paul Elie Vlaminck mete sou pye an kolaborasyon ak administrasyon CFTM. Dekouvri fòmasyon pwofesyonèl nou yo ak sistèm rasanbleman lajan Ekonomi Lakay.",
+                btnPartner: "Vini yon Patnè", btnAgent: "Antre kòm Ajan", btnDon: "Fè yon Don",
+                tForm: "Fòmasyon Sètifye Nou Yo", f1T: "Kibèsekirite Avanse",
+                f1D: "Aprann kijan pou pwoteje sistèm enfòmatik, rezo telefòn, ak kijan pou kontwole sistèm Unix ak Termux an sekirite.",
+                f2T: "Market Management", f2D: "Devlope gwo kapasite nan estrateji lavant sèvis sou entènèt, jere kliyan ak otomatizasyon biznis.",
+                tLakay: "Ekonomi Lakay (Sistèm Epany)", e1Tag: "Epany Pèsonèl", e1T: "Epany pou yon Objektif",
+                e1D: "Sere lajan nan fason pa w pou kont ou pou w reyalize pwojè w tankou achte yon òdinatè, peye lekòl oswa lòt aktivite.",
+                e1B: "Kòmanse Objektif Mwen", e2Tag: "Sistèm Kolektif", e2D1: "Gwoup kotizasyon solidè ak dinamik. Yon epany kolektif pou miltipliye lajan w ak tout konfyans.",
+                e2B1: "Antre nan Ekonomi Pam", e3D2: "Kotizasyon an gwoup ti pa ti pa. Pi bon fason pou w bati yon gwo sekirite finansyè ak moun serye.",
+                e3B2: "Antre nan Tipa Tipa Lakay"
+            },
+            en: {
+                navTitle: "OPPORTUNITÉ plus", heroTitle: "Modern Technology & Solidarity",
+                heroDesc: "Founded by Paul Elie Vlaminck in coordination with the CFTM administration. Explore our premium high-tech programs and our breakthrough economic network Économie Lakay.",
+                btnPartner: "Become a Partner", btnAgent: "Join as an Agent", btnDon: "Make a Donation",
+                tForm: "Our Certified Programs", f1T: "Advanced Cybersecurity",
+                f1D: "Master penetration testing methodologies, mobile/network defense architectures, and professional secure Unix/Termux systems administration.",
+                f2T: "Market Management", f2D: "Acquire solid field experience in digital product distribution strategies, CRM, and corporate sales workflow automation.",
+                tLakay: "Économie Lakay (Solidarity Savings)", e1Tag: "Personal Savings", e1T: "Goal-Oriented Savings",
+                e1D: "Save independently and securely at your own rhythm to bring your educational, computing, or professional projects to life.",
+                e1B: "Create My Goal", e2Tag: "Collective Group", e2D1: "Dynamic joint savings circle. Group-allocated mutual deposits planned on recurring rotations to reliably grow your seed capital.",
+                e2B1: "Join Ekonomi Pam", e3D2: "Step-by-step collaborative savings pool. Perfectly engineered to establish solid financial security within a verified local community.",
+                e3B2: "Join Tipa Tipa Lakay"
+            }
+        };
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            const d = dict[lang];
+            
+            document.getElementById('nav-title').innerHTML = lang === 'kr' ? "OPPÒTINITE <span>plus</span>" : "OPPORTUNITÉ <span>plus</span>";
+            document.getElementById('hero-title').innerText = d.heroTitle;
+            document.getElementById('hero-desc').innerText = d.heroDesc;
+            document.getElementById('btn-cta-partner').innerText = d.btnPartner;
+            document.getElementById('btn-cta-agent').innerText = d.btnAgent;
+            document.getElementById('btn-cta-don').innerText = d.btnDon;
+            document.getElementById('title-formations').innerText = d.tForm;
+            document.getElementById('f1-title').innerText = d.f1T;
+            document.getElementById('f1-desc').innerText = d.f1D;
+            document.getElementById('f2-title').innerText = d.f2T;
+            document.getElementById('f2-desc').innerText = d.f2D;
+            document.getElementById('title-lakay').innerText = d.tLakay;
+            document.getElementById('e1-tag').innerText = d.e1Tag;
+            document.getElementById('e1-title').innerText = d.e1T;
+            document.getElementById('e1-desc').innerText = d.e1D;
+            document.getElementById('e1-btn').innerText = d.e1B;
+            document.getElementById('e2-tag').innerText = d.e2Tag;
+            document.getElementById('e3-tag').innerText = d.e3Tag;
+            document.getElementById('e2-desc1').innerText = d.e2D1;
+            document.getElementById('e2-btn1').innerText = d.e2B1;
+            document.getElementById('e3-desc2').innerText = d.e3D2;
+            document.getElementById('e3-btn2').innerText = d.e3B2;
+        }
+    </script>
+</body>
+</html>

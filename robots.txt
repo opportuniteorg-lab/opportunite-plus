@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Indique explicitement l'emplacement du sitemap aux moteurs de recherche
+Sitemap: https://opportuniteorg-lab.github.io/opportunite-plus/sitemap.xml
