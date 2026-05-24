@@ -1,0 +1,13 @@
+:root {
+  --bleu-fonce: #0B192C;
+  --bleu-clair: #1E3A8A;
+  --blanc: #FFFFFF;
+  --vert-opportunite: #10B981; /* Un vert moderne, dynamique et financier */
+  --fond-ecran: #F8FAFC;
+}
+
+body {
+  background-color: var(--fond-ecran);
+  color: var(--bleu-fonce);
+  font-family: system-ui, -apple-system, sans-serif;
+}
