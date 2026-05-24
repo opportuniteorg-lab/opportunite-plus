@@ -1,0 +1,22 @@
+baseURL = 'https://opportunite-plus.com/'
+languageCode = 'fr-ht'
+title = 'OPPORTUNITÉ ➕'
+defaultContentLanguage = 'fr'
+
+[languages]
+  [languages.fr]
+    title = 'OPPORTUNITÉ ➕'
+    languageName = 'Français'
+    weight = 1
+  [languages.ht]
+    title = 'OPÒTINITE ➕'
+    languageName = 'Kreyòl'
+    weight = 2
+  [languages.en]
+    title = 'OPPORTUNITY ➕'
+    languageName = 'English'
+    weight = 3
+  [languages.es]
+    title = 'OPORTUNIDAD ➕'
+    languageName = 'Español'
+    weight = 4
